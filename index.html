@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>População por Local</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f1f1;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        table {
+            width: 400px;
+            margin: 20px auto;
+            background-color: #fff;
+            border-collapse: collapse;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        button {
+            padding: 5px 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>População por Local</h1>
+
+    <table>
+        <tr>
+            <th>Local</th>
+            <th>População</th>
+            <th>Porcentagem</th>
+        </tr>
+        <tr>
+            <td id="local1">Caucasóides</td>
+            <td id="population1">0</td>
+            <td id="percentage1">0%</td>
+            <td>
+                <button onclick="incrementPopulation(1)">Adicionar</button>
+                <button onclick="decrementPopulation(1)">Remover</button>
+            </td>
+        </tr>
+        <tr>
+            <td id="local2">Áfricos</td>
+            <td id="population2">0</td>
+            <td id="percentage2">0%</td>
+            <td>
+                <button onclick="incrementPopulation(2)">Adicionar</button>
+                <button onclick="decrementPopulation(2)">Remover</button>
+            </td>
+        </tr>
+        <tr>
+            <td id="local3">Panasiáticos</td>
+            <td id="population3">0</td>
+            <td id="percentage3">0%</td>
+            <td>
+                <button onclick="incrementPopulation(3)">Adicionar</button>
+                <button onclick="decrementPopulation(3)">Remover</button>
+            </td>
+        </tr>
+        <tr>
+            <td id="local4">Mesolatinos</td>
+            <td id="population4">0</td>
+            <td id="percentage4">0%</td>
+            <td>
+                <button onclick="incrementPopulation(4)">Adicionar</button>
+                <button onclick="decrementPopulation(4)">Remover</button>
+            </td>
+        </tr>
+    </table>
+
+    <script>
+        // Função para atualizar as porcentagens
+        function updatePercentages() {
+            var populations = [
+                parseInt(document.getElementById("population1").innerHTML),
+                parseInt(document.getElementById("population2").innerHTML),
+                parseInt(document.getElementById("population3").innerHTML),
+                parseInt(document.getElementById("population4").innerHTML)
+            ];
+
+            var totalPopulation = populations.reduce((a, b) => a + b, 0);
+
+            for (var i = 1; i <= 4; i++) {
+                var population = populations[i - 1];
+                var percentage = population / totalPopulation * 100;
+                document.getElementById("percentage" + i).innerHTML = percentage.toFixed(2) + "%";
+            }
+        }
+
+        // Função para incrementar a população
+        function incrementPopulation(localNumber) {
+            var populationElement = document.getElementById("population" + localNumber);
+            var population = parseInt(populationElement.innerHTML);
+            population++;
+            populationElement.innerHTML = population;
+            updatePercentages();
+        }
+
+        // Função para decrementar a população
+        function decrementPopulation(localNumber) {
+            var populationElement = document.getElementById("population" + localNumber);
+            var population = parseInt(populationElement.innerHTML);
+            if (population > 0) {
+                population--;
+                populationElement.innerHTML = population;
+                updatePercentages();
+            }
+        }
+    </script>
+</body>
+</html>
